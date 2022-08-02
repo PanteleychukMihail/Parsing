@@ -1,5 +1,8 @@
+"""Parsing photo"""
+
 import requests
 from PIL import Image
+
 from io import BytesIO
 
 
@@ -16,14 +19,14 @@ def download(query: str, page_count: int) -> None:
             for item in _r.get("photos"):
                 _img_url = item.get("src").get("original")
                 resp = requests.get(_img_url)
-            image=Image.open(BytesIO(resp.content))
+            image = Image.open(BytesIO(resp.content))
             image.save(f'media/{query}_{i}.{_img_url.split(".")[-1]}')
         else:
             print(r.status_code)
         i += 1
 
 
-def main() :
+def main():
     query = input("Ouery  ")
     page_count = int(input("Count_page  "))
     download(query, page_count)

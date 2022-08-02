@@ -1,3 +1,5 @@
+"""work with requests"""
+
 import requests
 
 

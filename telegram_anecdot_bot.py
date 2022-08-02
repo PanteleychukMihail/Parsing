@@ -1,3 +1,5 @@
+"""Telegram anecdote bot"""
+
 import requests
 from bs4 import BeautifulSoup as b
 import random
@@ -8,6 +10,7 @@ API_Key = "5403583311:AAG1uPi9a93xhbI4PS2ZAnJQF5EmbEdH_N8"
 
 
 def parser(url):
+    """make parser"""
     r = requests.get(url)
     soup = b(r.text, "html.parser")
     anekdots = soup.find_all("div", class_="text")
@@ -18,9 +21,9 @@ list_of_jokes = parser(URL)
 random.shuffle(list_of_jokes)
 
 bot = telebot.TeleBot(API_Key)
+
+
 @bot.message_handler(commands=["start"])
-
-
 def hello(message):
     bot.send_message(message.chat.id, "Привет, чтобы посмеяться, нажми любую цифру")
 
